@@ -8,7 +8,15 @@
 1. From the left hand menu, navigate to **Projects** → **Select the project available**\
    ![](https://lh7-us.googleusercontent.com/docsz/AD_4nXfhuMykMsIHl-7FjliWssHc0uwRpdLdrnq7GkGAI0g6UBZM69F1zpQ8ZA8N_vMqjpoGFYFR_weJk7OtOGGa2bksIaS6BlktwytmuJ1THM3e8O6tDT18HYWwFyGUye8ubsrHBChI8ORrCQ88JcKWpLjQ0DsXDS0NSZrkfZ4RUQ?key=cRG2cvp_PHVW0KG2Gq6Y_A)
 
+2. From the module selection menu select **Artifact Registry**
+ <img width="744" height="510" alt="image" src="https://github.com/user-attachments/assets/aa438c8f-8ff1-4886-9105-281aba6ba0c6" />
 
+3. Click **+ New Artifact Registry**, enter the following values, then click **Create Registry**
+
+| Field                                  | Value            | Notes
+| -------------------------------------- | ---------------- | ------------------------------------------------------------------------------------------ |
+| Registry Type                                   |Generic|  This registry will be used to store .zip files                 |
+| Registry Name | lambda |
 
 
 
