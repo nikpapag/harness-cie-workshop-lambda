@@ -1,3 +1,17 @@
+# Lab 1 - Artifact Registry
+
+### Summary: Setup a registry, to store .zip source code of harness functions
+
+### Outcome: Ready to use cloud native generic storage
+
+**Steps**
+1. From the left hand menu, navigate to **Projects** → **Select the project available**\
+   ![](https://lh7-us.googleusercontent.com/docsz/AD_4nXfhuMykMsIHl-7FjliWssHc0uwRpdLdrnq7GkGAI0g6UBZM69F1zpQ8ZA8N_vMqjpoGFYFR_weJk7OtOGGa2bksIaS6BlktwytmuJ1THM3e8O6tDT18HYWwFyGUye8ubsrHBChI8ORrCQ88JcKWpLjQ0DsXDS0NSZrkfZ4RUQ?key=cRG2cvp_PHVW0KG2Gq6Y_A)
+
+
+
+
+
 # Lab 1 - Build
 
 ### Summary: Setup a CI Pipeline, including running source code tests, building the executable, building and pushing the artifact to a remote repository
