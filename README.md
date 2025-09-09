@@ -266,43 +266,26 @@ For the target infrastructure we need to point the pipeline to the AWS account u
 | Name     |lambda_function_url|       |
 
 
-7. Click on **Save** and run the pipeline
+7. Click on **Save** and **run** the pipeline
+
+8.  After the pipeline passes the terraform step navigate to the executed step and search the **output* for the function URL
+
+9.  Navigate to the url and look for the promotion!!!
 
 
-
-# Lab 7 - Validate Release
+# Lab 5 - Validate The Canary
 
 **Learning Objective(s):**
 
 - Identify the difference in traffic between normal and canary instances of the application
 
-- Automate release validation
-
 - Use complex deployment strategies to reduce the blast radius
 
-**Steps**:
-
-- While the canary deployment is ongoing navigate to the web page and see if you can spot the canary (use the check release button) 
-
-| project                | domain        | suffix |
-| ---------------------- | ------------- | ------ |
-| http\://\<project\_id>|.cie-bootcamp|.co.uk|
-
-- Drill down to the distribution test tab and run the traffic generation by clicking the **Start** button
-
-- Observe the traffic distribution
-
-- Validate the outcome of the verification on the pipeline execution details
-
-
-\
-![](https://lh7-us.googleusercontent.com/docsz/AD_4nXdbAmEJ5zQPsKlw_nEknWvYo97pm5eWCXr6vU8-GgIL0ulAOSH9N07PoEcVSknARVQo7Tgj1s31VHqR1I3hu2dMIO1rIX5HHcmTPXoQPoyo8CPv13OhnJN5WVcZqSwUXzdDHmm3PxUnhtpGVl0PAMJ_1wnuodvUbVPBOdnGKQ?key=cRG2cvp_PHVW0KG2Gq6Y_A)
-![](https://lh7-us.googleusercontent.com/docsz/AD_4nXf-5oWX9OfvdmEb9MBm2_h2KKAa_QwmiJoM0fiKrTuxAr6GR4wxeulSlk48gyBK3dykrtIslDSkxpiGytrxH0JaxaQ4ZgTYxbmc8OenAH3nhGCvvOAxkWVjVBp1TRg_qQQi9z8OrNPK4udPtNL1LIyym6Ch5IMzrulFOcXhOQ?key=cRG2cvp_PHVW0KG2Gq6Y_A)
-
 **Bonus**:
-- If the verification fails harness defaults to a manual intervention, you can now decide what you want to happen next (rollback, ignore etc.) 
 
-- Add a canary rollout from 10% to 50% traffic and see how this impacts the traffic distribution
+- Introduce an approval process to slow down the canary transition
+- Change the traffic shift to 30%
+- While the traffic is shifted towards the new release navigate to the url and try to find the canary
 
 
 # Lab 8 - Governance/Policy as Code
