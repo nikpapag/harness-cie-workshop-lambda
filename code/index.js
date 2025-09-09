@@ -109,7 +109,6 @@ function competitionView(){
           <ul>
             <li>One entry per person</li>
             <li>No purchase necessary</li>
-            <li>We only use your email to contact the winner</li>
           </ul>
         </div>
       </div>
