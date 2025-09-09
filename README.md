@@ -145,12 +145,15 @@
 9. Click **Save** and then click **Run** to execute the pipeline with the following inputs
 
 
-
 | Input       | Value | Notes |
 | ----------- | ----- | ----- |
 | Branch Name |main|       |
 
-After the **Build and Push** stage is complete, go to the **Security Tests** tab to see the deduplicated, normalized and prioritized list of vulnerabilities discovered across your scanners.
+After the **Pipeline completes successfully**, go to the **Security Tests** tab to see the deduplicated, normalized and prioritized list of vulnerabilities discovered across your scanners.
+
+Navigate to the **artifact registry module** to review the lambda function package pushed to the registry
+
+<img width="1405" height="464" alt="image" src="https://github.com/user-attachments/assets/f55aba9b-649c-4919-b3b1-9179c44dcf46" />
 
 
 # Lab 3 - Continuous Deploy - Frontend
@@ -161,7 +164,7 @@ After the **Build and Push** stage is complete, go to the **Security Tests** tab
 
 - Add a second stage to an existing pipeline
 
-- Create a k8s service
+- Create a lambda service
 
 - Incorporate an advanced deployment strategy such as Canary
 
@@ -178,39 +181,44 @@ After the **Build and Push** stage is complete, go to the **Security Tests** tab
 
 | Input           | Value          | Notes |
 | --------------- | -------------- | ----- |
-| Stage Name      |frontend|       |
-| Deployment Type |Kubernetes|       |
+| Stage Name      | Lambda |       |
+| Deployment Type |AWS Lambda|       |
 
-4. Configure the **frontend** Stage with the following\
+4. Configure the **Lambda** Stage with the following\
    **Service**
 
 - Click **+Add Service** and configure as follows****
 
+| Field                      | Value                                               | Notes                              |
+| -------------------------- | --------------------------------------------------- | ---------------------------------- |
+|Name | lambda_service || 
 
+**+Add AWS Lambda Function Definition**
+
+| Field                      | Value                                               | Notes                              |
+| -------------------------- | --------------------------------------------------- | ---------------------------------- |
+|AWS Lambda Function Definition Store | Harness ||  
+|Manifest Identifier| function_zip | |
+|File/Folder Path| **Select the lambda definition file**| Notice how the function definition is parameterised |
+
+
+**+Add Artifact Source** 
 | Input                      | Value                                               | Notes                              |
 | -------------------------- | --------------------------------------------------- | ---------------------------------- |
-| Name                       |frontend|                                    |
-| Deployment Type            |Kubernetes|                                    |
-| * **Add Manifest**         |                                                     |                                    |
-| Manifest Type              |K8s Manifest|                                    |
-| K8s Manifest Store         |Code|                                    |
-| Manifest Identifier        |templates|                                    |
-| Repository                 |harnessrepo|                                    |
-| Branch                     |main|                                    |
-| File/Folder Path           |harness-deploy/frontend/manifests|                                    |
-| Values.yaml                |harness-deploy/frontend/values.yaml|                                    |
 | - **Add Artifact Source**  |                                                     |                                    |
-| Artifact Repository Type   |Docker Registry|                                    |
-| Docker Registry Connector  |dockerhub|                                    |
-| Artifact Source Identifier |frontend|                                    |
-| Image Path                 |nikpap/harness-workshop|                                    |
-| Tag                        |<+variable.username>-<+pipeline.sequenceId>| Select value, then click on the pin and select expression and paste the value |
+| Artifact Repository Type   |Artifact Registry|                                    |
+| Artifact Source Identifier |lambda|                                    |
+| Registry                |**Select the registry with your project id**| Created in Lab 1                                    |
+| Image Name                        |lambda||
+| Version                      |<+pipeline.stages.Build.spec.execution.steps.package.output.outputVariables.output_folder>|Notice how we reference the ouput of the package template, validate naming conventions follow the instructions of this lab|
+| File Name| <+pipeline.stages.Build.spec.execution.steps.package.output.outputVariables.output_file>| Notice how we reference the ouput of the package template, validate naming conventions follow the instructions of this lab|
+
 
 - Click **Save** to close the service window and then click **Continue** to go to the Environment tab
 
 **Environment**
 
-The target infrastructure has been pre-created for us. The application will be deployed to a k8s cluster on the given namespace  
+For the target infrastructure we need to point the pipeline to the AWS account used for the workshop
 
 - Click **- Select -** on the **"Specify Environment"** input box 
 
@@ -222,19 +230,18 @@ The target infrastructure has been pre-created for us. The application will be d
 
 - Click **- Select -** on the **"Specify Infrastructure"** input box
 
--  From the dropdown select k8s
-
+-  From the dropdown select aws-workshop
 
 
 | Input | Value | Notes |
 | ----- | ----- | ----- |
-| Name  |k8s|       |
+| Name  |aws-workshop|       |
 
 - Click **Continue** 
 
 **Execution Strategies**
 
-- Select **Rolling** and click on **Use Strategy**, the frontend is a static application so no need to do canary.
+- Select **Canary** and click on **Use Strategy**
 
 
 # Lab 4 - Continuous Deploy - Backend
