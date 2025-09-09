@@ -12,7 +12,7 @@
 
 2. From the module selection menu select **Artifact Registry**
  <img width="744" height="510" alt="image" src="https://github.com/user-attachments/assets/aa438c8f-8ff1-4886-9105-281aba6ba0c6" />
-
+ 
 3. Click **+ New Artifact Registry**, enter the following values, then click **Create Registry**
 
 | Field                                  | Value            | Notes
@@ -109,7 +109,7 @@
 | Branch Name |main| prepopulated |
 
 
-# Lab 2 - DevSecOps
+# Lab 3 - DevSecOps
 
 **Summary:** Our security team has implemented orchestration of **Fortify** and **OWASP** scans for our code in a reusable form **(templates)**. In order to improve our security posture they have also added policies to enforce us to include those templates
 
@@ -156,7 +156,7 @@ Navigate to the **artifact registry module** to review the lambda function packa
 <img width="1405" height="464" alt="image" src="https://github.com/user-attachments/assets/f55aba9b-649c-4919-b3b1-9179c44dcf46" />
 
 
-# Lab 3 - Continuous Deploy - Lambda Function
+# Lab 4 - Continuous Deploy - Lambda Function
 
 ### Summary: Extend your existing pipeline to take the artifact built in the CI/Build stage and deploy it to an environment
 
@@ -244,7 +244,7 @@ For the target infrastructure we need to point the pipeline to the AWS account u
 - Select **Canary** and click on **Use Strategy**
 
 
-# Lab 4 - Continuous Deploy - Access the Function
+# Lab 5 - Continuous Deploy - Access the Function
 
 ### Summary: Extend your existing pipeline to integrate with terraform 
 
@@ -273,7 +273,7 @@ For the target infrastructure we need to point the pipeline to the AWS account u
 9.  Navigate to the url and look for the promotion!!!
 
 
-# Lab 5 - Governance/Policy as Code
+# Lab 6 - Governance/Policy as Code
 
 ### Summary: Create and apply policies as code in order to enable governance and promote self-service. In Lab 2 we saw how a user is impacted by policies in place, now is the time to create such policies
 
@@ -309,7 +309,7 @@ For the target infrastructure we need to point the pipeline to the AWS account u
 
 2. Try to run the pipeline and note that the failure due to lack of an approval stage
 
-# Lab 5 - Validate The Canary
+# Lab 7 - Validate The Canary
 
 **Learning Objective(s):**
 
@@ -344,7 +344,7 @@ For the target infrastructure we need to point the pipeline to the AWS account u
 - While the Traffic Shift is happening navigate to the function URL and validate the canary (Take a screenshot and share it with the Harness Team) 
 
 
-# Lab 6 - Governance/Policy as Code (Advanced)
+# Lab 8 - Governance/Policy as Code (Advanced)
 
 **Create a Policy to block critical CVEs**
 
