@@ -244,229 +244,30 @@ For the target infrastructure we need to point the pipeline to the AWS account u
 - Select **Canary** and click on **Use Strategy**
 
 
-# Lab 4 - Continuous Deploy - Backend
+# Lab 4 - Continuous Deploy - Access the Function
 
-### Summary: Extend your existing pipeline to derisk production deployments
+### Summary: Extend your existing pipeline to integrate with terraform 
 
 **Learning Objective(s):**
 
-- Utilise complex deployment strategies to reduce blast radius of a release 
+- Utilise complex deployment strategies and integrations to achieve an end to end deployment
 
 **Steps**
 
-5. In the existing pipeline, add a Deployment stage by clicking **Add Stage** and select **Deploy** as the Stage Type
+5. In the existing pipeline, within the **lambda** stage between the **Canary Deploy** and the **Traffic Shift Step** add a template
 
-6. Enter the following values and click on **Set Up Stage**
+<img width="853" height="222" alt="image" src="https://github.com/user-attachments/assets/15233771-fc0a-4343-a777-921b3b3cafb9" />
+
+6. Select the **TF lambda function URL** template and click **Use Template**
 
 
 | Input           | Value          | Notes |
 | --------------- | -------------- | ----- |
-| Stage Name      |backend|       |
-| Deployment Type |Kubernetes|       |
+| Name     |lambda_function_url|       |
 
-7. Configure the **backend** Stage with the following\
-   **Service**
 
-- Click **- Select -**  on the **"Select Service"** input box and configure as follows:
+7. Click on **Save** and run the pipeline
 
-
-| Input | Value       | Notes |
-| ----- | ----------- | ----- |
-| Name  |backend|       |
-
-- Click **Apply Selected** and then click **Continue** to go to the **"Environment"** tab
-
-**Environment**
-
-The target infrastructure has been pre-created for us and we used it in the previous stage. To reuse the same environment
-
-- Click **- Propagate Environment From**
-
-- Select **Stage \[frontend]**
-
-- Click **Continue**
-
-**Execution**
-
-- Select **Canary**  and click on **Use Strategy**
-
-- **After** the canary deployment and **before** the canary delete step add **Harness Approval** step according to the table  below
-
-| Input       | Value             | Notes |
-| ----------- | ----------------- | ----- |
-| Name        |Approval|       |
-| User Groups |All Project Users|     Select project to see the **"All Project Users"** option   |
-- Click **Apply Changes**
-
-8. Click **Save** and then click **Run** to execute the pipeline with the following inputs. As a bonus, save your inputs as an Input Set before executing (see below)
-
-| Input       | Value | Notes       |
-| ----------- | ----- | ----------- |
-| Branch Name |main| Leave as is |
-
-9. While the canary deployment is ongoing and waiting **approval** navigate to the web page and see if you can spot the canary (use the check release button) 
-
-| project                | domain        | suffix |
-| ---------------------- | ------------- | ------ |
-|http\://project_id|.cie-bootcamp|.co.uk|
-
-![](https://lh7-us.googleusercontent.com/docsz/AD_4nXfmb1N3lAe0EOnEun9neU9y3ilqy3HbxfnWfUMzF3FsykslwgQfU_W4pE0wlt5kYSp6_mTs7cVP0anhJ7uvtsytal2qX3ZEq3vvOT3DOBUzE9SZ3rpwkAHP6e_ExdRbo5VmN2kpxdFlp6u8iGaKwhW_uyAohEmJurkjmEB2Ww?key=cRG2cvp_PHVW0KG2Gq6Y_A)
-
-10. Approve the canary deployment for the pipeline to complete
-
-# Lab 6 - Chaos Engineering
-
-
-### Summary: Fully integrated chaos experiments with the delivery process
-
-**Learning Objective(s):**
-
-- Auto generate chaos experiments on deployed services
-- Build a chaos experiments using a base fault (out of 200 OOTB faults)
-- Embed chaos engineering experiments into the deployment process
-- Add continuous verification to the deployed service
-- Automate release validation
-
-**Steps**
-
-1. From the module selection menu select chaos engineering
-
-   ![Screenshot 2024-11-28 at 14 07 39](https://github.com/user-attachments/assets/5c520265-658f-4953-a95c-7a5c3c57ecdf)
-
-4. From the left hand menu, go to **Project Settings**
-5. From the available tiles select “Discovery”
-6. After expanding the side menu of the “DA-K8s” agent click on “Discover Now”
-
-  ![image](https://github.com/user-attachments/assets/be1a029d-9b4e-4971-9519-f284ba75c815)
-
-
-
-**Create Application Map**
-
-1. After discovery is complete double click on the agent “DA-K8s”
-
-   ![image](https://github.com/user-attachments/assets/3094b76d-1d27-429d-ab67-0fdb8e978894)
-
-
-1. Select the "Application Maps" tab
-2. Click on **Create New Application Map** and enter the following values
-
-| Input                        | Value|  
-| ---------------------------- | ------ |
-| Name                         |workshop-am|
-
-4. Select the relevant services for your project name "use the search function to find the services"
-5. Click Save
-
-**Create Experiments Automatically**
-
-1. From the left hand menu, go to **Application Maps**
-2. Select the previously created application map (It is normal for the page to be loading while calculating the resiliency score)
-3. From the navigation menu select **Chaos Experiments**
-4. From the available list of fault profiles select **Only a few**
-5. Double click on the web-frontend experiment and run it
-    1. Observe the logs and validate the application’s resiliency by navigating to the app
-
-**Create Experiments manually**
-
-1. From the left hand menu, go to **Chaos Experiments**
-2. Select **+New Experiment**
-
-| Input                        | Value|  
-| ---------------------------- | ------ |
-| Name                         |pod-memory|
-
-3. Select **Harness Infra**
-
-  ![Screenshot 2024-11-28 at 14 24 21](https://github.com/user-attachments/assets/c47834a3-fe88-44ed-be7e-7cee97bcb303)
-
-  - Click on **"Select a chaos Infrastructure"**
-
- 
-4. On the popup window select the available options
-
-| Input                        | Value|  
-| ---------------------------- | ------ |
-| Select Environment|prod|
-| Select Infrastructure|k8s|
-
-5. Click on next to navigate to the experiment builder
-6. Start with blank canvas
-7. Click on **Add**
-8. From the list of available faults select **Pod Memory Hog**
-9. Target Application Inputs (Warning: Read the notes on the table below)
-
-| Input       | Value | Notes       |
-| ----------- | ----- | ----------- |
-| Select App Kind |deployment| Leave as is |
-| Namespace |**select from the dropdown** | |
-| Name |**select the backend service from the dropdown**| We will change that later |
-
-10. Tune Fault
-
-| Input       | Value |
-| ----------- | ----- |
-| Total Chaos Duration |300|
-| Memory Consumption |300|
-| Number of workers |1|
-| Pod affected percentage|100|
-
-11. For the probes click on +Select or Add new probes
-12. Select the default probe and click on **Add to Fault**
-13. For the probe mode select **Continuous** and click on **Apply Changes**
-14. Save the experiment
-
-**Change target service to canary using YAML**
-
-1. From the pipeline visual editor switch to yaml
-2. Click the edit button to go into edit mode
-3. Locate the service name (set on previous state)
-4. Replace it with **backend-<project_name>-deployment-canary** where project_name is the harness project
-5. Save the experiment
-
-
-**Embed chaos experiments into CD pipelines**
-
-1. From the module selection menu select Continuous Delivery & GitOps
-
-
-   ![Screenshot 2024-11-28 at 14 07 22](https://github.com/user-attachments/assets/898ee27b-7369-47c6-a145-e74b49bb4bed)
-
-   
-2. From the left hand side menu select pipelines and drill down to the existing pipeline
-
-3. In the existing pipeline, within the Deploy backend stage **after** Canary Deployment and **before** the approval step click on the plus icon to add a new step
-
-4. Add a **Verify** step with the following configuration
-
-| Input                        | Value  | Notes                                                                                            |
-| ---------------------------- | ------ | ------------------------------------------------------------------------------------------------ |
-| Name                         |Verify|                                                                                                  |
-| Continuous Verification Type |Canary|                                                                                                  |
-| Sensitivity                  |Low| This is to define how sensitive the ML algorithms are going to be on deviation from the baseline |
-| Duration                     |10mins|                                                                                                  |
-
-5. Under the verify step click on the plus icon to add a new step in parallel
-
-
-   ![Screenshot 2024-11-28 at 14 28 38](https://github.com/user-attachments/assets/368ba808-d303-43f8-8824-5d2e09367b01)
-
-   
-6. Add a **chaos** step with the following configuration
-
-| Input                        | Value  |
-| ---------------------------- | ------ |
-| Name                         |Chaos|
-| Select Chaos Experiment |pod-memory|
-|  Expected Resilience Score|50| 
-
-7. Click on Apply Changes
-
-8. Click **Save** and then click **Run** to execute the pipeline with the following inputs. As a bonus, save your inputs as an Input Set before executing (see below)
-
-| Input       | Value | Notes       |
-| ----------- | ----- | ----------- |
-| Branch Name |main| Leave as is |
 
 
 # Lab 7 - Validate Release
