@@ -156,7 +156,7 @@ Navigate to the **artifact registry module** to review the lambda function packa
 <img width="1405" height="464" alt="image" src="https://github.com/user-attachments/assets/f55aba9b-649c-4919-b3b1-9179c44dcf46" />
 
 
-# Lab 3 - Continuous Deploy - Frontend
+# Lab 3 - Continuous Deploy - Lambda Function
 
 ### Summary: Extend your existing pipeline to take the artifact built in the CI/Build stage and deploy it to an environment
 
