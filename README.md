@@ -284,8 +284,8 @@ For the target infrastructure we need to point the pipeline to the AWS account u
 **Bonus**:
 
 - Introduce an approval process to slow down the canary transition
-- Change the traffic shift to 30%
-- While the traffic is shifted towards the new release navigate to the url and try to find the canary
+- Change the traffic shift to 40%
+- While the traffic is shifted towards the new release navigate to the url and try to find the canary using the UI
 
 
 # Lab 6 - Governance/Policy as Code
