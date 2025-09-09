@@ -8,6 +8,8 @@
 1. From the left hand menu, navigate to **Projects** → **Select the project available**\
    ![](https://lh7-us.googleusercontent.com/docsz/AD_4nXfhuMykMsIHl-7FjliWssHc0uwRpdLdrnq7GkGAI0g6UBZM69F1zpQ8ZA8N_vMqjpoGFYFR_weJk7OtOGGa2bksIaS6BlktwytmuJ1THM3e8O6tDT18HYWwFyGUye8ubsrHBChI8ORrCQ88JcKWpLjQ0DsXDS0NSZrkfZ4RUQ?key=cRG2cvp_PHVW0KG2Gq6Y_A)
 
+
+
 2. From the module selection menu select **Artifact Registry**
  <img width="744" height="510" alt="image" src="https://github.com/user-attachments/assets/aa438c8f-8ff1-4886-9105-281aba6ba0c6" />
 
@@ -16,7 +18,7 @@
 | Field                                  | Value            | Notes
 | -------------------------------------- | ---------------- | ------------------------------------------------------------------------------------------ |
 | Registry Type                                   |Generic|  This registry will be used to store .zip files                 |
-| Registry Name | lambda |
+| Registry Name | project name | **Use the project id as the registry name** |
 
 
 
@@ -83,13 +85,13 @@
 
 - After completing configuration select **Apply Changes** from the top right of the configuration popup
 
-- Select **Add Step**, then **Use template** (In this step we will be building the binary following same config as before. To avoid duplication of efforts a template has been precreated)
+- Select **Add Step**, then **Use template** (In this step we will be building the source code for the lambda function. To avoid duplication of efforts a template has been precreated)
 
 
 
 | Input         | Value               | Notes |
 | ------------- | ------------------- | ----- |
-| Template Name |Compile Application|       |
+| Template Name |Build and Package Lambda|       |
 
 - Select the  template and press **Use Template,** then provide a name for that template
 
@@ -97,25 +99,9 @@
 
 | Input | Value   | Notes |
 | ----- | ------- | ----- |
-| Name  |Compile|       |
+| Name  |package|  **It is important to use the exact name provided as we will reference the output from this template later on |
 
-- Select **Add Step**, then **Add Step** again, then select **Build and Push an image to Docker Registry** from the Step Library and configure with the following
-
-
-
-| Input             | Value                                               | Notes                                                                    |
-| ----------------- | --------------------------------------------------- | ------------------------------------------------------------------------ |
-| Name              |Push to DockerHub|                                                                          |
-| Docker Connector  |dockerhub|                                                                          |
-| Docker Repository |nikpap/harness-workshop|                                                                          |
-| Tags              |<+variable.username>-<+pipeline.sequenceId>| This will be the tag of the image using harness expressions. Click on the pin and select expression and paste the value              |
-| **Optional  Configuration** |                                            |                                                                                                                                                   |
-| Dockerfile        |/harness/frontend-app/harness-webapp/Dockerfile| This tells harness where is the Dockerfile for building the app          |
-| Context           |/harness/frontend-app/harness-webapp| This tells from where to run the instructions included in the dockerfile |
-
-1. Click **Apply Changes** to close the config dialog
-
-6) Click **Save** and then click **Run** to execute the pipeline with the following inputs
+- Click **Save** and then click **Run** to execute the pipeline with the following inputs
 
 
 | Input       | Value | Notes        |
