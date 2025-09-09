@@ -288,7 +288,7 @@ For the target infrastructure we need to point the pipeline to the AWS account u
 - While the traffic is shifted towards the new release navigate to the url and try to find the canary
 
 
-# Lab 8 - Governance/Policy as Code
+# Lab 6 - Governance/Policy as Code
 
 ### Summary: Create and apply policies as code in order to enable governance and promote self-service. In Lab 2 we saw how a user is impacted by policies in place, now is the time to create such policies
 
