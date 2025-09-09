@@ -273,22 +273,7 @@ For the target infrastructure we need to point the pipeline to the AWS account u
 9.  Navigate to the url and look for the promotion!!!
 
 
-# Lab 5 - Validate The Canary
-
-**Learning Objective(s):**
-
-- Identify the difference in traffic between normal and canary instances of the application
-
-- Use complex deployment strategies to reduce the blast radius
-
-**Bonus**:
-
-- Introduce an approval process to slow down the canary transition
-- Change the traffic shift to 40%
-- While the traffic is shifted towards the new release navigate to the url and try to find the canary using the UI
-
-
-# Lab 6 - Governance/Policy as Code
+# Lab 5 - Governance/Policy as Code
 
 ### Summary: Create and apply policies as code in order to enable governance and promote self-service. In Lab 2 we saw how a user is impacted by policies in place, now is the time to create such policies
 
@@ -324,30 +309,42 @@ For the target infrastructure we need to point the pipeline to the AWS account u
 
 2. Try to run the pipeline and note that the failure due to lack of an approval stage
 
-3. Click **Save** and note that the failure due to lack of an approval stage
+# Lab 5 - Validate The Canary
 
-4. Open the pipeline in edit mode and navigate to the “**frontend**” stage
+**Learning Objective(s):**
 
-5. Before the rolling deployment step add **Harness Approval** step according to the table  below
+- Identify the difference in traffic between normal and canary instances of the application
+
+- Use complex deployment strategies to reduce the blast radius
+
+**Bonus**:
+
+- Introduce an approval process to slow down the canary transition
+- Change the traffic shift to 40%
+- While the traffic is shifted towards the new release navigate to the url and try to find the canary using the UI
+
+**Steps**
+- Open the pipeline in edit mode and navigate to the “**lambda**” stage
+- Between the traffic shift steps add **Harness Approval** step according to the table  below
 
 | Input            | Value            | Notes |
 | ---------------- | ---------------- | ----- |
 | Step Name        |Approval|       |
 | Type of Approval |Harness Approval|       |
 
-6. Configure the Approval step as follows
+- Configure the Approval step as follows
 
 | Input       | Value             | Notes |
 | ----------- | ----------------- | ----- |
 | Name        |Approval|       |
 | User Groups |All Project Users|       |
 
-7. In a similar way as before navigate to the “**backend**” stage
-8. Before the canary deployment block add **Harness Approval**
-10. Click **Save** and note that the save succeeds without any policy failure
+- Click **Save** and run the pipeline
+- 
+- While the Traffic Shift is happening navigate to the function URL and validate the canary (Take a screenshot and share it with the Harness Team) 
 
 
-# Lab 9 - Governance/Policy as Code (Advanced)
+# Lab 6 - Governance/Policy as Code (Advanced)
 
 **Create a Policy to block critical CVEs**
 
