@@ -204,7 +204,7 @@ Extend your existing pipeline to take the artifact built in the CI/Build stage a
 
   | Input | Value        | Notes |
   | ----- | ------------ | ----- |
-  | Name  | aws-workshop |       |
+  | Name  | aws_workshop |       |
 
 - Continue.
 
